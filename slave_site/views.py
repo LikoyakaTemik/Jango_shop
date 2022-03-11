@@ -1,9 +1,8 @@
 from django.shortcuts import render
 import sqlite3 as sq
-db = sq.connect("DB")
 class Database_construction:
     @staticmethod
-    def creating_tables():
+    def creating_tables(db):
         try:
             db.execute("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                        " nickname TEXT,"
@@ -31,6 +30,7 @@ class Database_construction:
         except:
             print("Таблицы уже созданы!")
 def index_page(request):
-    context = {}
-    
-    return render(request,"index.html", context)
+    db = sq.connect("DB")
+    Database_construction.creating_tables(db)
+    db.close()
+    return render(request,"Main_page.html")
