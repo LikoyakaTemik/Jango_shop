@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href = "{% static 'style.css' %}"/>
 </head>
 <body>
-
+    <div class="reki">
+        <h1 class="rekii">REKOMENDACII</h1>
+    </div>
+    <div class="ad">
+    <div class ="add1"></div>
+    </div>
+    <div class="ad1">
+    <div class ="add2"></div>
+    </div>
 </body>
 </html>
 {% endblock %}
