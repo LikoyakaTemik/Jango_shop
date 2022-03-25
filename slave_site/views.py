@@ -37,12 +37,6 @@ class Database_construction:
                        " amount INTEGER)")
         except:
             print("Таблицы уже созданы!")
-def index_page(request):
-    db = sq.connect("DB")
-    Database_construction.creating_tables(db)
-    db.close()
-    return render(request,"Main_page.html")
-
 
 def adding_product(request):
     db = sq.connect("DB")
@@ -175,4 +169,3 @@ def index_page(request):
     Database_construction.creating_tables(db)
     db.close()
     return render(request,"Main_page.html")
-
