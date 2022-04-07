@@ -7,18 +7,28 @@
     <meta charset="UTF-8">
     <title>Main</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href = "{% static 'style.css' %}"/>
 </head>
 <body>
-    <div class="reki">
-        <h1 class="rekii">Рекомендации</h1>
+<h1><span class="badge bg-primary bg-gradient middle">Рекомендации</span></h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for id, props in products.items %}
+  <div class="col">
+    <div class="card border-primary mb-3">
+      <img src="{{ props.img }}" class="card-img-top" alt="...">
+      <div class="card-body text-primary">
+        <h5 class="card-title">{{ props.label }}</h5>
+        <p class="card-text"> {{ props.category }}</p>
+      </div>
+        <div class="card-footer">
+            <small class="text-muted"><img class="icon" src="static/img/baseline_thumb_up_black_24dp.png">{{ props.likes }}</small>
+            <button type="button" class="btn btn-primary btn-sm" ><img class="icon" src="static/img/shopping-cart.png">Купить {{ props.price }}</button>
+        </div>
     </div>
-    <div class="ad">
-    <div class ="add1"></div>
-    </div>
-    <div class="ad1">
-    <div class ="add2"></div>
-    </div>
+  </div>
+    {% endfor %}
+</div>
 </body>
 </html>
 {% endblock %}
