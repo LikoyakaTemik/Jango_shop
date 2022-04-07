@@ -4,8 +4,12 @@ def get_base_context(request):
     menu = [
         {"link": "/catalog/", "text": "Каталог"},
     ]
+    products = {
+        "0" : {"label": "Name", "category": "category", "price": "75819$", "img": "static/img/id1.jpeg", "likes": "0"},
+        "1": {"label": "Name", "category": "category", "price": "7529$", "img": "static/img/id1.jpeg", "likes": "0"},
+    }
 
-    return {"menu": menu, "user": request.user}
+    return {"menu": menu, "user": request.user, "products": products}
 
 def index_page(request):
     context = get_base_context(request)
@@ -14,6 +18,10 @@ def index_page(request):
 def catalog_page(request):
     context = get_base_context(request)
     return render(request, "catalog.html", context)
+
+def login_page(request):
+    context = get_base_context(request)
+    return render(request, "login.html", context)
 
 def login_page(request):
     context = get_base_context(request)
@@ -69,7 +77,7 @@ import sqlite3 as sq
 class Database_construction:
     @staticmethod
     def creating_tables(db):
-        try: 
+        try:
             db.execute("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                        " nickname TEXT,"
                        " mail TEXT,"
@@ -99,4 +107,4 @@ def index_page(request):
     db = sq.connect("DB")
     Database_construction.creating_tables(db)
     db.close()
-    return render(request,"Main_page.html")
+    return render(request,"index.html")
