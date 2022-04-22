@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
           <div class="container-fluid">
-            <a class="navbar-brand" href="/">SLAVE'S MARKET</a>
+            <a class="navbar-brand" href="/"><img src="/static/img/handcuffs.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                SERVUS FORUM
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,13 +27,13 @@
               <div class="container-fluid">
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
             </div>
           </div>
             <div>
                 {% if user.is_authenticated %}
-                    <a class="nav-link active text-black aria-current="page" href="/logout/">Выйти</a>
+                    <a class="nav-link active text-black" aria-current="page" href="/logout/">Выйти</a>
                 {% else %}
                     <a class="nav-link active text-black" aria-current="page" href="/login/">Войти</a>
                 {%  endif %}
