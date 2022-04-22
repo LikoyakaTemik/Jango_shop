@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href = "{% static 'style.css' %}"/>
 </head>
 <body>
-    <h1>SLAVES</h1>
+    <div class="reki">
+        <h1 class="rekii">Рекомендации</h1>
+    </div>
+    <div class="ad">
+    <div class ="add1"></div>
+    </div>
+    <div class="ad1">
+    <div class ="add2"></div>
+    </div>
 </body>
 </html>
+{% endblock %}
