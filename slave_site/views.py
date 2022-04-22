@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
@@ -68,14 +67,6 @@ def adding_product(request):
                 db.execute("UPDATE shopping_cart SET amount=" + ammo + " WHERE id_user=" + id_user + " AND id_product=" + id_product)
     db.close()
     return JsonResponse()
-  
-def get_base_context(request):
-    menu = [
-        {"link": "/catalog/", "text": "Каталог"},
-    ]
-
-    return {"menu": menu, "user": request.user}
-
 
 def catalog_page(request):
     context = get_base_context(request)
@@ -188,26 +179,19 @@ def registration(request):
         return render(request, 'Registration.html', tranport_data)
 
 def index_page(request):
-
     context = get_base_context(request)
-
     if request.method == "POST":
         db = sq.connect("db.sqlite3")
         Database_construction.creating_tables(db)
         db.close()
-
         return render(request, "index.html", context)
-
     elif request.method == "GET":
         db = sq.connect("db.sqlite3")
         Database_construction.creating_tables(db)
         db.close()
-        return render(request, "index.html")
+        return render(request, "index.html", context)
 
 class SignUpView(generic.CreateView):
-    form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
-
-        return render(request, "index.html", context)
 
