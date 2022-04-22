@@ -1,62 +1,20 @@
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from django.views import generic
 
-def index_page(request):
-    context = {}
-    return render(request,"index.html", context)
-def registration(request):
-    database = sq.connect("mesbase.sqlite3", timeout=10)
-    info = []
-    try:
-        database.execute(
-            "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, nickname TEXT, password TEXT)")
-    except:
-        pass
-
-    if(request.method=="POST"):
-        nick = request.POST.get("nick")
-        pasw = request.POST.get("password")
-        info = "nonclear"
-        try:
-            info = (database.execute("SELECT * FROM users WHERE nickname='" + request.POST.get("nick") + "'")).fetchall()
-        except:
-            pass
-
-        if(info == []):
-            pasw_res = ""
-
-            for i in range(len(pasw)):
-                if(ord(pasw[i]) >= 33):
-                    pasw_res = pasw_res + chr(ord(pasw[i]) + 10)
-            pasw = pasw_res
-
-            try:
-                database.execute("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, nickname TEXT, password TEXT)")
-            except:
-                pass
-            with database:
-                database.execute("INSERT INTO users(nickname, password) VALUES ('" + nick + "', '" + pasw + "')")
-                database.commit()
-            database.close()
-            return render(request, 'congratulateyou.html')
-        else:
-            database.close()
-            return render(request, 'error.html')
-
-
-    elif(request.method=="GET"):
-        tranport_data = {"user": nickname[0]}
-        database.close()
-        return render(request, 'Registration.html', tranport_data)
-from django.shortcuts import render
 import sqlite3 as sq
+id_user = 0
+nickname = ["Anonymous"]
 class Database_construction:
     @staticmethod
     def creating_tables(db):
-        try: 
-            db.execute("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                       " nickname TEXT,"
-                       " mail TEXT,"
-                       " password TEXT)")
+        try:
             db.execute("CREATE TABLE products(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                        " label TEXT,"
                        " likes INTEGER,"
@@ -78,8 +36,135 @@ class Database_construction:
                        " amount INTEGER)")
         except:
             print("Таблицы уже созданы!")
-def index_page(request):
-    db = sq.connect("DB")
+
+def adding_product(request):
+    db = sq.connect("db.sqlite3")
     Database_construction.creating_tables(db)
+    if request.method == "POST":
+        id_product = int(request.POST.get('id'))
+        ammo = (db.execute("SELECT amount FROM shopping_cart WHERE id_user=" + id_user + " AND id_product=" + id_product)).fetchall()
+        if(len(ammo) == 0):
+            with db:
+                db.execute("INSERT INTO shopping_cart(id_user, id_product, amount)"
+                           " VALUES(" + id_user + ", " + id_product + ", 1)")
+        else:
+            ammo = ammo[0][0] + 1
+            with db:
+                db.execute("UPDATE shopping_cart SET amount=" + ammo + " WHERE id_user=" + id_user + " AND id_product=" + id_product)
     db.close()
-    return render(request,"Main_page.html")
+    return JsonResponse()
+  
+def get_base_context(request):
+    menu = [
+        {"link": "/catalog/", "text": "Каталог"},
+    ]
+
+    return {"menu": menu, "user": request.user}
+
+def catalog_page(request):
+    context = get_base_context(request)
+    return render(request, "catalog.html", context)
+
+
+
+def enter(request):
+    """display page of enter, executing of code of backend of log in"""
+    db = sq.connect("db.sqlite3")
+    Database_construction.creating_tables(db)
+    ###подключение к БД
+    if (request.method == "POST"):
+        email = str(request.POST.get("exampleInputEmail1"))
+        password = str(request.POST.get("exampleInputPassword1"))
+        info = "nonclear"
+
+        info = (db.execute("SELECT 'auth_user'.'email' FROM 'auth_user' WHERE ('auth_user'.'email'='" + email + "')")).fetchall()
+
+
+        ##проверка на наличие ячейки
+        if(info == []):
+            print(info)
+            print(email)
+            print("NONE_EMAIL")
+            db.close()
+            return render(request, 'error.html') ##Нужно сделать
+        else:
+            truepassword = str(((db.execute("SELECT 'auth_user'.'password' from 'auth_user' WHERE ('auth_user'.'email'='" + email + "')")).fetchall())[0][0])
+            if(truepassword == password):
+                logging = ""
+                if (email == "Anonymous"):
+                    logging = "Войти"
+                else:
+                    logging = "Выйти"
+                tranport_data = {"username": email, "logging": logging}
+                nickname[0] = ((db.execute("SELECT 'auth_user'.'username' from 'auth_user' WHERE ('auth_user'.'email'='" + email + "')")).fetchall())[0][0]
+                db.close()
+                return redirect("http://127.0.0.1:8000", logging = "Выйти")
+            else:
+                db.close()
+                print("FALSE_PASSWORD")
+                return render(request, 'error.html')
+            ###сравнивание: есл и пароли совпадают -> логин, иначе ошибка
+
+
+    elif (request.method == "GET"):
+        db.close()
+        return render(request, 'login.html')
+
+
+def registration(request):
+    info = []
+    db = sq.connect("db.sqlite3")
+    Database_construction.creating_tables(db)
+
+    if(request.method=="POST"):
+        nick = request.POST.get("nick")
+        pasw = request.POST.get("password")
+        info = "nonclear"
+        try:
+            info = (db.execute("SELECT * FROM users WHERE nickname='" + request.POST.get("nick") + "'")).fetchall()
+        except:
+            pass
+
+        if(info == []):
+            pasw_res = ""
+
+            for i in range(len(pasw)):
+                if(ord(pasw[i]) >= 33):
+                    pasw_res = pasw_res + chr(ord(pasw[i]) + 10)
+            pasw = pasw_res
+
+            try:
+                db.execute("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, nickname TEXT, password TEXT)")
+            except:
+                pass
+            with db:
+                db.execute("INSERT INTO users(nickname, password) VALUES ('" + nick + "', '" + pasw + "')")
+                db.commit()
+            db.close()
+            return render(request, 'congratulateyou.html')
+        else:
+            db.close()
+            return render(request, 'error.html')
+
+
+    elif(request.method=="GET"):
+        tranport_data = {"user": nickname[0]}
+        db.close()
+        return render(request, 'Registration.html', tranport_data)
+
+def index_page(request):
+    if request.method == "POST":
+        db = sq.connect("db.sqlite3")
+        Database_construction.creating_tables(db)
+        db.close()
+        return render(request, "index.html")
+    elif request.method == "GET":
+        db = sq.connect("db.sqlite3")
+        Database_construction.creating_tables(db)
+        db.close()
+        return render(request, "index.html")
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
