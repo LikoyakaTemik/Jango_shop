@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/">SLAVE'S MARKET</a>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
           <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/static/img/handcuffs.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
@@ -27,6 +31,9 @@
               <div class="container-fluid">
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+              <button class="btn btn-outline-success" type="submit">Search</button>
+
               <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
             </div>
@@ -35,11 +42,20 @@
                 {% if user.is_authenticated %}
                     <a class="nav-link active text-black" aria-current="page" href="/logout/">Выйти</a>
                 {% else %}
+
+                    <a class="nav-link active text-black" aria-current="page" href="http://127.0.0.1:8000/accounts/login/">Войти</a>
+
                     <a class="nav-link active text-black" aria-current="page" href="/login/">Войти</a>
+
                 {%  endif %}
             </div>
         </nav>
     {% block content %}
+
+{% endblock %}
+    {% block main %}
+
+
 
     {% endblock %}
 </body>
