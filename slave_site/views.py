@@ -6,6 +6,8 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from slave_site.forms import AddProductForm
+from slave_site.models import Product
 
 import sqlite3 as sq
 id_user = 0
@@ -36,6 +38,17 @@ class Database_construction:
         except:
             print("Таблицы уже созданы!")
 
+def get_base_context(request):
+    menu = [
+        {"link": "/catalog/", "text": "Каталог"},
+        {"link": "/new_product/", "text": "Добавить товар"},
+    ]
+    db = sq.connect("db.sqlite3")
+    Database_construction.creating_tables(db)
+    products = (db.execute("SELECT * FROM products")).fetchall()
+    db.close()
+    return {"menu": menu, "user": request.user, "products": products}
+
 def adding_product(request):
     db = sq.connect("db.sqlite3")
     Database_construction.creating_tables(db)
@@ -52,19 +65,38 @@ def adding_product(request):
                 db.execute("UPDATE shopping_cart SET amount=" + ammo + " WHERE id_user=" + id_user + " AND id_product=" + id_product)
     db.close()
     return JsonResponse()
-  
-def get_base_context(request):
-    menu = [
-        {"link": "/catalog/", "text": "Каталог"},
-    ]
 
-    return {"menu": menu, "user": request.user}
 
 def catalog_page(request):
     context = get_base_context(request)
     return render(request, "catalog.html", context)
 
-
+def new_product(request):
+    context = get_base_context(request)
+    db = sq.connect("db.sqlite3")
+    if request.method == "POST":
+        form = AddProductForm(request.POST)
+        label = form.data["label"]
+        price = form.data["price"]
+        url_img = form.data["url_img"]
+        if form.is_valid():
+            with db:
+                arr =(label, price, url_img)
+                db.execute("INSERT INTO products(label, price, url_img) VALUES(?, ?, ?)", arr)
+            context["form"] = form
+        """
+        if form.is_valid():
+            label = form.data["label"]
+            price = form.data["price"]
+            new_product_record = Product(label=label, price=price)
+            new_product_record.save()
+            context["form"] = form
+        """
+    else:
+        form = AddProductForm()
+        context["form"] = form
+    db.close()
+    return render(request, "new_product.html", context)
 
 def enter(request):
     """display page of enter, executing of code of backend of log in"""
@@ -152,13 +184,14 @@ def registration(request):
         return render(request, 'Registration.html', tranport_data)
 
 def index_page(request):
+    context = get_base_context(request)
     if request.method == "POST":
         db = sq.connect("db.sqlite3")
         Database_construction.creating_tables(db)
         db.close()
-        return render(request, "index.html")
+        return render(request, "index.html", context)
     elif request.method == "GET":
         db = sq.connect("db.sqlite3")
         Database_construction.creating_tables(db)
         db.close()
-        return render(request, "index.html")
+        return render(request, "index.html", context)
