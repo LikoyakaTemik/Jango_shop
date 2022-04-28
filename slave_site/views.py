@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.views import generic
@@ -85,7 +86,7 @@ def new_product(request):
                 arr =(label, price, url_img)
                 db.execute("INSERT INTO products(label, price, url_img) VALUES(?, ?, ?)", arr)
             context["form"] = form
-      
+
     else:
         form = AddProductForm()
         context["form"] = form
@@ -192,6 +193,6 @@ def index_page(request):
         return render(request, "index.html", context)
 
 class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
-
