@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="reki">
-        <h1 class="rekii">Рекомендации</h1>
+
     </div>
     <div class="ad">
     <div class ="add1"></div>
@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href = "{% static 'style.css' %}"/>
 </head>
 <body>
-<div><h1><span class="badge bg-primary bg-gradient middle">Рекомендации</span></h1></div>
+    <div><h1><span class="badge bg-primary bg-gradient middle">Рекомендации</span></h1></div>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for item in products %}
   <div class="col">
@@ -33,10 +33,10 @@
         <img src={{item.5}} class="card-img-top h-100" alt="...">
       <div class="card-body text-primary">
         <h5 class="card-title">{{ item.1 }}</h5>
-        <p class="card-text"> {{ item.2 }}</p>
+        <p class="card-text"> {{ item.3 }}</p>
       </div>
         <div class="card-footer">
-            <small class="text-muted"><img class="icon" src="static/img/baseline_thumb_up_black_24dp.png">{{ item.3 }}</small>
+            <small class="text-muted"><img class="icon" src="static/img/baseline_thumb_up_black_24dp.png">{{ item.2 }}</small>
             <button type="button" class="btn btn-primary btn-sm" ><img class="icon" src="static/img/shopping-cart.png">Купить {{ item.4 }}</button>
         </div>
     </div>
