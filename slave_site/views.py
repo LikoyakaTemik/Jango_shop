@@ -81,10 +81,12 @@ def new_product(request):
         label = form.data["label"]
         price = form.data["price"]
         url_img = form.data["url_img"]
+        likes = 0
+        id_category = form.data["category"]
         if form.is_valid():
             with db:
-                arr =(label, price, url_img)
-                db.execute("INSERT INTO products(label, price, url_img) VALUES(?, ?, ?)", arr)
+                arr =(label,likes,id_category, price, url_img)
+                db.execute("INSERT INTO products(label, likes, id_category, price, url_img) VALUES(?, ?, ?, ?, ?)", arr)
             context["form"] = form
         return redirect("http://127.0.0.1:8000")
 
