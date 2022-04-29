@@ -86,6 +86,7 @@ def new_product(request):
                 arr =(label, price, url_img)
                 db.execute("INSERT INTO products(label, price, url_img) VALUES(?, ?, ?)", arr)
             context["form"] = form
+        return redirect("http://127.0.0.1:8000")
 
     else:
         form = AddProductForm()
