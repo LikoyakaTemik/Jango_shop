@@ -22,8 +22,9 @@ class Database_construction:
                        " label TEXT,"
                        " likes INTEGER,"
                        " id_category TEXT,"
-                       " price INTEGER, "
-                       " url_img TEXT)")
+                       " price INTEGER,"
+                       " url_img TEXT,"
+                       " user_name TEXT)")
             db.execute("CREATE TABLE users_products(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                        " id_product INTEGER,"
                        " id_user INTEGER)")
@@ -81,12 +82,13 @@ def new_product(request):
         label = form.data["label"]
         price = form.data["price"]
         url_img = form.data["url_img"]
+        user = str(request.user)
         likes = 0
         id_category = form.data["category"]
         if form.is_valid():
             with db:
-                arr =(label,likes,id_category, price, url_img)
-                db.execute("INSERT INTO products(label, likes, id_category, price, url_img) VALUES(?, ?, ?, ?, ?)", arr)
+                arr = (label,likes,id_category, price, url_img, user)
+                db.execute("INSERT INTO products(label, likes, id_category, price, url_img, user_name) VALUES(?, ?, ?, ?, ?, ?)", arr)
             context["form"] = form
         return redirect("http://127.0.0.1:8000")
 
@@ -184,6 +186,7 @@ def registration(request):
 
 def index_page(request):
     context = get_base_context(request)
+
     if request.method == "POST":
         db = sq.connect("db.sqlite3")
         Database_construction.creating_tables(db)
