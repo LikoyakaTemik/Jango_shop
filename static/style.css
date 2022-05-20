@@ -1,0 +1,325 @@
+.panel{
+    position: absolute;
+width: 1707px;
+height: 100px;
+left: 0px;
+top: 0px;
+background: rgba(63, 0, 243, 0.68);
+}
+
+.img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.zag{
+position: absolute;
+width: 322px;
+height: 59px;
+left: 47px;
+top: 20px;
+font-family: 'Playfair Display SC';
+font-style: normal;
+font-weight: 400;
+font-size: 43px;
+line-height: 0px;
+color: #000000;
+
+}
+
+.panel1{
+    position: absolute;
+width: 170px;
+height: 50px;
+left: 400px;
+top: 25px;
+background: #FFFFFF;
+border-radius: 15px;
+}
+.catalog{
+position: absolute;
+width: 111px;
+height: 77px;
+left: 30px;
+top: 0px;
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 700;
+font-size: 23px;
+line-height: 27px;
+color: #000000;
+
+}
+
+.poisk{
+position: absolute;
+width: 500px;
+height: 50px;
+left: 600px;
+top: 25px;
+background: #FFFFFF;
+border-radius: 15px;
+}
+.poiskn{
+    position: absolute;
+width: 111px;
+height: 77px;
+left: 30px;
+top: 0px;
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 700;
+font-size: 23px;
+line-height: 27px;
+color: #000000;
+
+}
+
+.user{
+    position: absolute;
+width: 90px;
+height: 85px;
+left: 1617px;
+top: 8px;
+}
+
+.reki{
+    position: absolute;
+width: 400px;
+height: 65px;
+left: 47px;
+top: 130px;
+
+background: #0d6efd;
+border-radius: 15px;
+}
+.rekii{
+ position: absolute;
+width: 300px;
+height: 47px;
+left: 75px;
+top: 10px;
+
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+
+color: #000000;
+}
+.ad{
+    position: absolute;
+width: 200px;
+height: 200px;
+left: 74px;
+top: 251px;
+
+background: #0d6efd;
+border-radius: 15px
+}
+.add1{
+    position: absolute;
+width: 180px;
+height: 180px;
+left: 10px;
+top: 10px;
+background: #C4C4C4;
+}
+
+.icon {
+position: relative;
+width: 20px;
+height: 20px;
+}
+
+.ad1{
+position: absolute;
+width: 200px;
+height: 200px;
+left: 347px;
+top: 251px;
+background: #0d6efd;
+border-radius: 15px;
+}
+
+.add2
+{
+position: absolute;
+width: 180px;
+height: 180px;
+left: 10px;
+top: 10px;
+background: #C4C4C4;
+}
+.reg
+{
+    position: absolute;
+width: 1000px;
+height: 515px;
+left: 350px;
+top:200px;
+background: rgba(63, 0, 243, 0.68);
+border-radius: 15px;
+}
+.b1
+{
+    position: absolute;
+width: 700px;
+height: 150px;
+left: 150px;
+top: 50px;
+
+background: #FFFFFF;
+border-radius: 15px;
+}
+.b2{
+    position: absolute;
+width: 700px;
+height: 150px;
+left: 150px;
+top: 300px;
+
+background: #FFFFFF;
+border-radius: 15px;
+}
+.h2{
+    position: absolute;
+width: 144px;
+height: 59px;
+left: 275px;
+top: 5px;
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 50px;
+line-height: 59px;
+
+color: #000000;
+}
+.h3{
+    position: absolute;
+width: 90px;
+height: 59px;
+left: 475px;
+top: 180px;
+
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 50px;
+line-height: 59px;
+
+color: #000000;
+
+}
+.h4{
+    position: absolute;
+width: 175px;
+height: 59px;
+left: 275px;
+top: 10px;
+
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 50px;
+line-height: 59px;
+
+color: #000000
+}
+.h5{
+    position: absolute;
+width: 165px;
+height: 59px;
+left: 27px;
+top: 30px;
+
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 50px;
+line-height: 59px;
+
+color: #000000;
+}
+.h6{
+    position: absolute;
+width: 201px;
+height: 59px;
+left: 27px;
+top: 200px;
+
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 50px;
+line-height: 59px;
+
+color: #000000;
+}
+.h7{
+    position: absolute;
+width: 137px;
+height: 47px;
+left: 175px;
+top: -10px;
+
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 47px;
+
+color: #000000;
+
+}
+.pol1{
+    position: absolute;
+width: 700px;
+height: 75px;
+left: 250px;
+top: 50px;
+
+background: #FFFFFF;
+border-radius: 15px;
+}
+.pol2{
+    position: absolute;
+width: 700px;
+height: 75px;
+left: 250px;
+top: 225px;
+
+background: #FFFFFF;
+border-radius: 15px;
+}
+.pol3
+{
+    position: absolute;
+width: 485px;
+height: 75px;
+left: 275px;
+top: 400px;
+
+background: #FFFFFF;
+border-radius: 15px;
+}
+.h8
+{
+      position: absolute;
+width: px;
+height: 47px;
+left: 10px;
+top: -10px;
+
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 47px;
+
+color: #000000;
+
+}
