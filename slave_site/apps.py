@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SlaveSiteConfig(AppConfig):
+class UsersConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'slave_site'
+    name = 'users'
