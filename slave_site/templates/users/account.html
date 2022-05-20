@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body>
+<div>
+    <h1>Личный Кабинет</h1>
+    <h2>Привет, {{ user.username|default:'Guest' }}</h2>
+    <div>
+        {% for items in products %}
+            <p>{{ items.1 }}</p>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

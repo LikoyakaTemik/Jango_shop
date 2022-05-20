@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+     <link rel="stylesheet" type="text/css" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href = "{% static 'style.css' %}"/>
+</head>
+<body>
+<div><h1><span class="badge bg-primary bg-gradient middle">Корзина</span></h1></div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for item in shopping_cart %}
+  <div class="col">
+    <div class="card border-primary mb-3 h-100">
+        <img src={{item.6}} class="card-img-top h-100" alt="...">
+      <div class="card-body text-primary">
+        <h5 class="card-title">{{ item.1 }}</h5>
+          <p class="card-text">{{ item.3 }}</p>
+          <p class="card-text">Продавец: {{ item.5 }}</p>
+      </div>
+        <div class="card-footer">
+            <form action="/create_chat/" method="post">{% csrf_token %}<input type="submit" name="username" value="{{ item.5 }}"></form>
+        </div>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+</body>
+</html>
+{% endblock %}

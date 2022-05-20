@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+     <link rel="stylesheet" type="text/css" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href = "{% static 'style.css' %}"/>
+</head>
+<body>
+<div><h1><span class="badge bg-primary bg-gradient middle">Список Чатов</span></h1></div>
+<div>
+    {% for item in chat %}
+        <div>
+        <form action="/room/" method="post">
+            <a>Нажмите, чтобы перейти в чат </a>{% csrf_token %}<input type="submit" name="username" value="{{ item.2 }}"><a> и {{ item.1 }}</a>
+        </form>
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
+{% endblock %}

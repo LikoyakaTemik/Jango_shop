@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col">
+                <form action="/new_product/" method="post">
+                    {% csrf_token %}
+                    <!--{{ form|crispy }}!-->
+                    <h4>Название</h4>
+                    <input type="text" name="label">
+                    <h4>Цена</h4>
+                    <input type="text" name="price">
+                    <h4>Ссылка на фото</h4>
+                    <input type="text" name="url_img"><br><br>
+                    <h4>Категория</h4>
+
+
+                    <input type="radio" id="category1" name="category" value="Электроника">
+                    <label style="font-size:20px;" for="category1">Электроника</label><br>
+                    <input type="radio" id="category2" name="category" value="Одежда">
+                    <label style="font-size:20px;" for="category2">Одежда</label><br>
+                    <input type="radio" id="category3" name="category" value="Обувь">
+                    <label style="font-size:20px;" for="category3">Обувь</label><br>
+                    <input type="radio" id="category4" name="category" value="Дом и сад">
+                    <label style="font-size:20px;" for="category4">Дом и сад</label><br>
+                    <input type="radio" id="category5" name="category" value="Детские товары">
+                    <label style="font-size:20px;" for="category5">Детские товары</label><br>
+                    <input type="radio" id="category6" name="category" value="Красота и здоровье">
+                    <label style="font-size:20px;" for="category6">Красота и здоровье</label><br>
+                    <input type="radio" id="category7" name="category" value="Бытовая техника">
+                    <label style="font-size:20px;" for="category7">Бытовая техника</label><br>
+                    <input type="radio" id="category8" name="category" value="Игры">
+                    <label style="font-size:20px;" for="category8">Игры</label><br>
+                    <input type="radio" id="category9" name="category" value="Путешевствия">
+                    <label style="font-size:20px;" for="category9">Путешевствия</label><br>
+                    <input type="radio" id="category10" name="category" value="Медицина">
+                    <label style="font-size:20px;" for="category10">Медицина</label><br>
+
+
+
+
+
+
+
+                   <br><br> <input type="submit" value="Добавить">
+                </form>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
