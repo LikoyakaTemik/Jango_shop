@@ -1,0 +1,1 @@
+web: gunicorn Juba_demo.wsgi --log-file -

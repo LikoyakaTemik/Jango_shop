@@ -1,2 +1,2 @@
-# JangoSlaves_website
-Main source of project of Jango_Slaves team
+# servus_forum
+ SERVUS FORUM - school project
