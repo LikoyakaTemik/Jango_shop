@@ -106,7 +106,7 @@ def chat_input(request):
         form = ChatInputForm()
         context["form"] = form
     db.close()
-    return redirect("http://127.0.0.1:8000/room")
+    return redirect("https://servusmarket.herokuapp.com/room")
 
 """def chat_output(request, receiver):
     context = get_base_context(request)
@@ -143,7 +143,7 @@ def room(request):
         Database_construction.creating_tables(db)
         db.close()
         """
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://servusmarket.herokuapp.com")
     elif request.method == "GET":
         db = sq.connect("db.sqlite3")
         Database_construction.creating_tables(db)
@@ -208,7 +208,7 @@ def add_sc(request):
             arr = (id_product, main_username, username)
             db.execute("INSERT INTO shopping_cart(id_product, main_username, username) VALUES(?, ?, ?)", arr)
         db.close()
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://servusmarket.herokuapp.com")
 
 def egor_letov(list):
     print(list)
@@ -232,7 +232,7 @@ def new_product(request):
                 arr = (label,likes,id_category, price, url_img, user)
                 db.execute("INSERT INTO products(label, likes, id_category, price, url_img, username) VALUES(?, ?, ?, ?, ?, ?)", arr)
             context["form"] = form
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://servusmarket.herokuapp.com")
 
     else:
         form = AddProductForm()
