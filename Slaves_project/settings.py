@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p7n1uwy59y67y)rsn)xm=54p@(q0hd#2^&)e4pexqrqv)#zj6$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", str(get_ip()), "localhost", "127.0.0.1", "0.0.0.0:8000", 'servusmarket.herokuapp.com]
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'users.apps.UsersConfig',
+    'slave_site',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'djangoSlave.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['users/templates/users'],
+        'DIRS': ['slave_site/templates/users'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
