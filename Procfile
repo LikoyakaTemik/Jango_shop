@@ -1,1 +1,1 @@
-web: gunicorn Juba_demo.wsgi --log-file -
+web: gunicorn Slaves_project.wsgi --log-file -
